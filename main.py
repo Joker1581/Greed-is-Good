@@ -1,4 +1,4 @@
-def score(dice):
+def score1(dice):
     # your code here
     dict = {}
     score = 0
@@ -29,5 +29,22 @@ def score(dice):
             score += 600
     return score
 
+def score(dice): 
+    sum = 0
+    counter = [0,0,0,0,0,0]
+    points = [1000, 200, 300, 400, 500, 600]
+    extra = [100,0,0,0,50,0]
+    for die in dice: 
+        counter[die-1] += 1
+
+    for (i, count) in enumerate(counter):
+        sum += (points[i] if count >= 3 else 0) + extra[i] * (count%3)
+
+    return sum 
+
 if __name__ == "__main__":
-    print(score([5, 1, 3, 4, 1]))
+    res = list()
+    dicelist = input("请输入5个1-6的数字,格式为1,2,3,4,5: ")
+    for i in dicelist.split(","):
+        res.append(int(i))
+    print(score(res))
